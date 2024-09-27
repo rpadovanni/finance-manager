@@ -1,10 +1,20 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
 import './index.css';
+import '@radix-ui/themes/styles.css';
 
-createRoot(document.getElementById('root')!).render(
+import { createRoot } from 'react-dom/client';
+import { StrictMode } from 'react';
+import { Theme, ThemePanel } from '@radix-ui/themes';
+
+import App from './App.tsx';
+
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+
+root.render(
   <StrictMode>
-    <App />
-  </StrictMode>,
+    <Theme accentColor="amber" radius="large" scaling="95%">
+      <App />
+      <ThemePanel />
+    </Theme>
+  </StrictMode>
 );

@@ -4,6 +4,8 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".dist/tsconfig.node.tsbuildinfo",
 
     /* Bundler mode */
     "moduleResolution": "bundler",

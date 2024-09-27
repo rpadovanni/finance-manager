@@ -1,42 +1,24 @@
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
-import { create } from 'zustand';
 
-interface MainState {
-  count: number;
-  increment: (by: number) => void;
-}
+import { Button, Flex, Text } from '@radix-ui/themes';
+// import { create } from 'zustand';
 
-const useMainStore = create<MainState>()(set => ({
-  count: 0,
-  increment: by => set(state => ({ count: state.count + by })),
-}));
+// interface MainState {
+//   count: number;
+//   increment: (by: number) => void;
+// }
+
+// const useMainStore = create<MainState>()(set => ({
+//   count: 0,
+//   increment: by => set(state => ({ count: state.count + by })),
+// }));
 
 function App() {
-  const { count, increment } = useMainStore();
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className='font-bold text-3xl underline'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => increment(1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Flex direction="column" gap="2">
+      <Text>Hello from Radix Themes :)</Text>
+      <Button>Let's go</Button>
+    </Flex>
   );
 }
 
