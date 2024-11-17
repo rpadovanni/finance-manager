@@ -1,0 +1,54 @@
+{
+  "name": "finance-manager",
+  "author": {
+    "name": "Rafael Padovani",
+    "email": "rafael.pdvn@gmail.com"
+  },
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "prebuild": "pnpm lint",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "prettify": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,html,json}\""
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "2.3.0",
+    "@shadcn/ui": "0.0.4",
+    "next": "15.0.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-redux": "9.1.2"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.2.3",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.15.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "22.9.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "eslint": "9.15.0",
+    "eslint-config-next": "15.0.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "postcss": "8.4.49",
+    "prettier": "3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "tailwindcss": "3.4.15",
+    "typescript": "5.6.3",
+    "typescript-eslint": "^8.14.0"
+  },
+  "overrides": {
+    "eslint": "$eslint"
+  },
+  "engines": {
+    "node": "22.9.0",
+    "pnpm": "9.12.1"
+  },
+  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+}
