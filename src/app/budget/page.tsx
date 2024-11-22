@@ -1,8 +1,4 @@
-interface Props {
-  newProp?: string;
-}
-
-const BudgetPage = ({}: Props) => {
+const BudgetPage = () => {
   return <div>BudgetPage</div>;
 };
 

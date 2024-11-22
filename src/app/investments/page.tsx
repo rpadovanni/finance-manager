@@ -1,8 +1,4 @@
-interface Props {
-  newProp?: string;
-}
-
-const InvestmentsPage = ({}: Props) => {
+const InvestmentsPage = () => {
   return <div>InvestmentsPage</div>;
 };
 

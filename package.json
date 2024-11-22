@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "prettify": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,html,json}\"",
+    "prettify": "prettier --write \"**/**/*.{js,jsx,ts,tsx,css,html,json}\"",
     "db:migrate": "node_modules/.bin/prisma migrate dev --name init",
     "db:seed": "pnpm dlx ts-node --compiler-options {\"module\":\"CommonJS\"}  prisma/seed.ts"
   },

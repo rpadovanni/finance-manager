@@ -1,8 +1,4 @@
-interface Props {
-  newProp?: string;
-}
-
-const AuthPage = ({}: Props) => {
+const AuthPage = () => {
   return <div>AuthPage</div>;
 };
 
