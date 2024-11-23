@@ -1,0 +1,50 @@
+name: Update PR Description
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  update-pr-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install Conventional Changelog
+        run: pnpm install -g conventional-changelog-cli
+
+      - name: Generate changelog
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+          conventional-changelog -p angular -r 2 > generated_changelog.md
+        shell: bash
+
+      - name: Update PR description
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Capture the changelog from the generated file
+          changelog=$(cat generated_changelog.md)
+
+          # Use GitHub API to update the pull request description
+          pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          payload:$(echo '{}' | jq --arg body "$changelog" '.body = $body')
+
+          curl -s -X PATCH \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$payload" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number"
