@@ -20,4 +20,58 @@ model User {
   password_hash String
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
+
+  monthly_incomes MonthlyIncome[]
+  spending_limits SpendingLimit[]
+  goals           Goal[]
+}
+
+// Financial Planning
+model MonthlyIncome {
+  id         Int      @id @default(autoincrement())
+  income     Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  distributions IncomeDistribution[]
+}
+
+model IncomeDistribution {
+  id         Int    @id @default(autoincrement())
+  category   String
+  percentage Int
+  amount     Float
+
+  monthly_income_id Int
+  monthly_income    MonthlyIncome @relation(fields: [monthly_income_id], references: [id])
+}
+
+model SpendingLimit {
+  id            Int      @id @default(autoincrement())
+  name          String
+  icon          String?
+  current_value Float?
+  limit_value   Float
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+}
+
+model Goal {
+  id            Int       @id @default(autoincrement())
+  name          String
+  icon          String?
+  current_value Float?
+  target_value  Float
+  deadline      DateTime?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
 }
