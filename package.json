@@ -14,8 +14,10 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prettify": "prettier --write \"**/**/*.{js,jsx,ts,tsx,css,html,json}\"",
+    "db:generate": "node_modules/.bin/prisma generate",
     "db:migrate": "node_modules/.bin/prisma migrate dev --name init",
-    "db:seed": "pnpm dlx ts-node --compiler-options {\"module\":\"CommonJS\"}  prisma/seed.ts"
+    "db:seed": "pnpm dlx ts-node --compiler-options '{\"module\":\"CommonJS\"}' prisma/seed.ts",
+    "db:studio": "node_modules/.bin/prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -23,6 +25,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@reduxjs/toolkit": "2.3.0",
     "@shadcn/ui": "0.0.4",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.460.0",
@@ -39,6 +42,7 @@
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.15.0",
     "@faker-js/faker": "^9.2.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "22.9.0",
     "@types/react": "18.3.12",
