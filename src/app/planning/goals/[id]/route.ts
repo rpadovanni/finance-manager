@@ -1,11 +1,11 @@
 /**
  * Handles GET, PATCH, DELETE for a dynamic route with ID
- * Example: /api/planning/spending-limits/[id]
+ * Example: /api/planning/goals/[id]
  *
- * Observations:
- *  1. The GET function fetches a single spending limit by ID.
- *  2. The PATCH function updates a single spending limit by ID.
- *  3. The DELETE function deletes a single spending limit by ID.
+ *  Observations:
+ *  1. The GET function fetches a single goal by ID.
+ *  2. The PATCH function updates a single goal by ID.
+ *  3. The DELETE function deletes a single goal by ID.
  *  4. Don't remove the `request: Request` parameter from the function signature,
  *     otherwise the endpoint won't work.
  */
@@ -27,22 +27,15 @@ export async function GET(
   }
 
   try {
-    const spendingLimit = await prisma.spendingLimit.findUnique({
+    const goals = await prisma.goal.findUnique({
       where: { id: queryId },
     });
 
-    if (!spendingLimit) {
-      return NextResponse.json(
-        { error: 'Spending limit not found' },
-        { status: 404 },
-      );
-    }
-
-    return NextResponse.json(spendingLimit, { status: 200 });
+    return NextResponse.json(goals, { status: 200 });
   } catch (error) {
-    console.error('Error fetching spending limit:', error);
+    console.error('Error fetching goals:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch spending limit' },
+      { error: 'Failed to fetch goals' },
       { status: 500 },
     );
   }
@@ -61,23 +54,24 @@ export async function PATCH(
 
   try {
     const body = await request.json();
-    const { current_value, icon, limit_value, name } = body;
+    const { name, icon, target_value, current_value, deadline } = body;
 
-    const updatedSpendingLimit = await prisma.spendingLimit.update({
+    const updatedGoal = await prisma.goal.update({
       where: { id: queryId },
       data: {
-        icon,
-        current_value,
-        limit_value,
         name,
+        icon,
+        deadline,
+        target_value,
+        current_value,
       },
     });
 
-    return NextResponse.json(updatedSpendingLimit, { status: 200 });
+    return NextResponse.json(updatedGoal, { status: 200 });
   } catch (error) {
-    console.error('Error updating spending limit:', error);
+    console.error('Error updating goal:', error);
     return NextResponse.json(
-      { error: 'Failed to update spending limit' },
+      { error: 'Failed to update goal' },
       { status: 500 },
     );
   }
@@ -95,29 +89,23 @@ export async function DELETE(
   }
 
   try {
-    const hasSpendingLimit = await prisma.spendingLimit.findUnique({
+    const hasGoal = await prisma.goal.findUnique({
       where: { id: queryId },
     });
 
-    if (!hasSpendingLimit) {
-      return NextResponse.json(
-        { error: 'Spending limit not found' },
-        { status: 404 },
-      );
+    if (!hasGoal) {
+      return NextResponse.json({ error: 'Goal not found' }, { status: 404 });
     }
 
-    await prisma.spendingLimit.delete({
+    await prisma.goal.delete({
       where: { id: queryId },
     });
 
-    return NextResponse.json(
-      { message: 'Spending limit deleted' },
-      { status: 200 },
-    );
+    return NextResponse.json({ message: 'Goal deleted' }, { status: 200 });
   } catch (error) {
-    console.error('Error deleting spending limit:', error);
+    console.error('Error deleting goal:', error);
     return NextResponse.json(
-      { error: 'Failed to delete spending limit' },
+      { error: 'Failed to delete goal' },
       { status: 500 },
     );
   }
