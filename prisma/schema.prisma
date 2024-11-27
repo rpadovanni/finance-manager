@@ -14,12 +14,13 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  email         String   @unique
+  id            String @id @default(uuid())
+  email         String @unique
   name          String
   password_hash String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   monthly_incomes MonthlyIncome[]
   spending_limits SpendingLimit[]
@@ -28,8 +29,9 @@ model User {
 
 // Financial Planning
 model MonthlyIncome {
-  id         Int      @id @default(autoincrement())
-  income     Float
+  id     Int   @id @default(autoincrement())
+  income Float
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -45,18 +47,22 @@ model IncomeDistribution {
   percentage Int
   amount     Float
 
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
   monthly_income_id Int
   monthly_income    MonthlyIncome @relation(fields: [monthly_income_id], references: [id])
 }
 
 model SpendingLimit {
-  id            Int      @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   name          String
   icon          String?
   current_value Float?
   limit_value   Float
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   user_id String
   user    User   @relation(fields: [user_id], references: [id])
@@ -69,8 +75,9 @@ model Goal {
   current_value Float?
   target_value  Float
   deadline      DateTime?
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   user_id String
   user    User   @relation(fields: [user_id], references: [id])

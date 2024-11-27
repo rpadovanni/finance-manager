@@ -15,11 +15,11 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
+export const GET = async (
   request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = await params;
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const id = (await params).id;
   const queryId = parseInt(id, 10);
 
   if (isNaN(queryId)) {
@@ -46,13 +46,13 @@ export async function GET(
       { status: 500 },
     );
   }
-}
+};
 
-export async function PATCH(
+export const PATCH = async (
   request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = await params;
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const id = (await params).id;
   const queryId = parseInt(id, 10);
 
   if (isNaN(queryId)) {
@@ -81,13 +81,13 @@ export async function PATCH(
       { status: 500 },
     );
   }
-}
+};
 
-export async function DELETE(
+export const DELETE = async (
   request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = await params;
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const id = (await params).id;
   const queryId = parseInt(id, 10);
 
   if (isNaN(queryId)) {
@@ -121,4 +121,4 @@ export async function DELETE(
       { status: 500 },
     );
   }
-}
+};

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export const GET = async () => {
   try {
     const goals = await prisma.goal.findMany({
       where: { user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80' },
@@ -17,9 +17,9 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+};
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   try {
     const body = await request.json();
     const { user_id, name, icon, target_value, current_value, deadline } = body;
@@ -50,4 +50,4 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
-}
+};

@@ -15,11 +15,11 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
+export const GET = async (
   request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = await params;
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const id = (await params).id;
   const queryId = parseInt(id, 10);
 
   if (isNaN(queryId)) {
@@ -27,25 +27,29 @@ export async function GET(
   }
 
   try {
-    const goals = await prisma.goal.findUnique({
+    const goal = await prisma.goal.findUnique({
       where: { id: queryId },
     });
 
-    return NextResponse.json(goals, { status: 200 });
+    if (!goal) {
+      return NextResponse.json({ error: 'Goal not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(goal, { status: 200 });
   } catch (error) {
-    console.error('Error fetching goals:', error);
+    console.error('Error fetching goal:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch goals' },
+      { error: 'Failed to fetch goal' },
       { status: 500 },
     );
   }
-}
+};
 
-export async function PATCH(
+export const PATCH = async (
   request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = await params;
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const id = (await params).id;
   const queryId = parseInt(id, 10);
 
   if (isNaN(queryId)) {
@@ -75,13 +79,13 @@ export async function PATCH(
       { status: 500 },
     );
   }
-}
+};
 
-export async function DELETE(
+export const DELETE = async (
   request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = await params;
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const id = (await params).id;
   const queryId = parseInt(id, 10);
 
   if (isNaN(queryId)) {
@@ -109,4 +113,4 @@ export async function DELETE(
       { status: 500 },
     );
   }
-}
+};
