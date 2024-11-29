@@ -3,6 +3,54 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/**
+ * @openapi
+ * /planning/monthly-income/{id}:
+ *  patch:
+ *    tags:
+ *      - Financial Planning - Monthly Income
+ *    summary: Update a monthly income
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: ID of the monthly income to update
+ *        schema:
+ *          type: integer
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/MonthlyIncomePostAndPatchSchema'
+ *    responses:
+ *      200:
+ *        description: Returns the updated monthly income
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/MonthlyIncome'
+ *      400:
+ *        description: Invalid ID or missing required field
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                error:
+ *                  type: string
+ *      404:
+ *         description: Monthly income not found
+ *      500:
+ *        description: Failed to update monthly income
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                error:
+ *                  type: string
+ */
 export const PATCH = async (
   request: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -15,6 +63,17 @@ export const PATCH = async (
   }
 
   try {
+    const hasMonthlyIncome = await prisma.monthlyIncome.findUnique({
+      where: { id: queryId },
+    });
+
+    if (!hasMonthlyIncome) {
+      return NextResponse.json(
+        { error: 'Spending limit not found' },
+        { status: 404 },
+      );
+    }
+
     const body = await request.json();
     const { income } = body;
 

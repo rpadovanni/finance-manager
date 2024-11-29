@@ -4,6 +4,59 @@ import { checkPercentageGreaterThanOneHundred } from '../utils/validations';
 
 const prisma = new PrismaClient();
 
+/**
+ * @openapi
+ * /planning/monthly-income/distribution:
+ *   post:
+ *     tags:
+ *      - Financial Planning - Monthly Income Distribution
+ *     summary: Create a new income distribution
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               category:
+ *                 type: string
+ *               percentage:
+ *                 type: number
+ *               amount:
+ *                 type: number
+ *               monthly_income_id:
+ *                 type: number
+ *             required:
+ *               - category
+ *               - percentage
+ *               - amount
+ *               - monthly_income_id
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/IncomeDistribution'
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
 export const POST = async (request: Request) => {
   try {
     const body = await request.json();

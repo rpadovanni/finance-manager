@@ -3,6 +3,25 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/**
+ * @openapi
+ * /planning/goals:
+ *  get:
+ *    tags:
+ *      - Financial Planning - Goals
+ *    summary: Get all goals for a user
+ *    responses:
+ *      200:
+ *        description: Returns an array of goals
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Goal'
+ *    500:
+ *      description: Failed to fetch goals
+ */
 export const GET = async () => {
   try {
     const goals = await prisma.goal.findMany({
@@ -19,6 +38,31 @@ export const GET = async () => {
   }
 };
 
+/**
+ * @openapi
+ * /planning/goals:
+ *  post:
+ *    tags:
+ *      - Financial Planning - Goals
+ *    summary: Create a new goal
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/GoalPost'
+ *    responses:
+ *      201:
+ *        description: Goal created successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Goal'
+ *      400:
+ *        description: Missing required fields
+ *      500:
+ *        description: Failed to create goal
+ */
 export const POST = async (request: Request) => {
   try {
     const body = await request.json();

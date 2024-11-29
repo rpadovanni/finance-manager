@@ -3,6 +3,25 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/**
+ * @openapi
+ * /planning/monthly-income:
+ *  get:
+ *    tags:
+ *      - Financial Planning - Monthly Income
+ *    summary: Get all monthly incomes for a user
+ *    responses:
+ *      200:
+ *        description: Returns an array of monthly incomes
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/MonthlyIncome'
+ *    500:
+ *      description: Failed to fetch monthly incomes
+ */
 export const GET = async () => {
   try {
     const returnedData = await prisma.monthlyIncome.findMany({
@@ -25,6 +44,31 @@ export const GET = async () => {
   }
 };
 
+/**
+ * @openapi
+ * /planning/monthly-income:
+ *  post:
+ *    tags:
+ *      - Financial Planning - Monthly Income
+ *    summary: Create a new monthly income
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/MonthlyIncomePostAndPatchSchema'
+ *    responses:
+ *      201:
+ *        description: Monthly income created successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/MonthlyIncome'
+ *      400:
+ *        description: Missing required field(s)
+ *      500:
+ *        description: Failed to create monthly income
+ */
 export const POST = async (request: Request) => {
   try {
     const body = await request.json();

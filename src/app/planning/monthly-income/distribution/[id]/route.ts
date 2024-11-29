@@ -4,6 +4,62 @@ import { checkPercentageGreaterThanOneHundred } from '../../utils/validations';
 
 const prisma = new PrismaClient();
 
+/**
+ * @openapi
+ * /planning/monthly-income/distribution/{id}:
+ *   patch:
+ *     tags:
+ *       - Financial Planning - Monthly Income Distribution
+ *     summary: Update an income distribution
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the income distribution to update
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               percentage:
+ *                 type: number
+ *               amount:
+ *                 type: number
+ *             required:
+ *               - percentage
+ *               - amount
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/IncomeDistribution'
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       404:
+ *         description: Income distribution not found
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
 export const PATCH = async (
   request: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -20,6 +76,17 @@ export const PATCH = async (
   }
 
   try {
+    const hasIncomeDistribution = await prisma.incomeDistribution.findUnique({
+      where: { id: queryId },
+    });
+
+    if (!hasIncomeDistribution) {
+      return NextResponse.json(
+        { error: 'Spending limit not found' },
+        { status: 404 },
+      );
+    }
+
     const body = await request.json();
     const { percentage, amount } = body;
 

@@ -3,6 +3,23 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/**
+ * @openapi
+ * /planning/spending-limits:
+ *   get:
+ *     tags:
+ *      - Financial Planning - Spending Limits
+ *     summary: Fetch all spending limits
+ *     responses:
+ *       200:
+ *         description: Spending limits fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *              $ref: '#/components/schemas/SpendingLimit'
+ *       500:
+ *         description: Failed to fetch spending limits
+ */
 export const GET = async () => {
   try {
     const spendingLimits = await prisma.spendingLimit.findMany({
@@ -19,6 +36,31 @@ export const GET = async () => {
   }
 };
 
+/**
+ * @openapi
+ * /planning/spending-limits:
+ *  post:
+ *    tags:
+ *      - Financial Planning - Spending Limits
+ *    summary: Create a new spending limit
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/SpendingLimit'
+ *    responses:
+ *      201:
+ *        description: Spending limit created successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/SpendingLimit'
+ *      400:
+ *        description: Missing required fields
+ *      500:
+ *        description: Failed to create spending limit
+ */
 export const POST = async (request: Request) => {
   try {
     const body = await request.json();
