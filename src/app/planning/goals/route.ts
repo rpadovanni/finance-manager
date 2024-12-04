@@ -19,14 +19,20 @@ const prisma = new PrismaClient();
  *              type: array
  *              items:
  *                $ref: '#/components/schemas/Goal'
- *    500:
- *      description: Failed to fetch goals
+ *      404:
+ *        description: No goals found
+ *      500:
+ *        description: Failed to fetch goals
  */
 export const GET = async () => {
   try {
     const goals = await prisma.goal.findMany({
       where: { user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80' },
     });
+
+    if (goals.length === 0) {
+      return NextResponse.json({ error: 'No goals found' }, { status: 404 });
+    }
 
     return NextResponse.json(goals, { status: 200 });
   } catch (error) {
@@ -74,6 +80,8 @@ export const POST = async (request: Request) => {
         { status: 400 },
       );
     }
+
+    // TODO: Validate user_id
 
     const newGoal = await prisma.goal.create({
       data: {

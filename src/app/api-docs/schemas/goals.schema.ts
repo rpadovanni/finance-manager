@@ -53,6 +53,9 @@ export const goalPostSchema = {
     target_value: {
       type: 'number',
     },
+    current_value: {
+      type: 'number',
+    },
     deadline: {
       type: 'string',
       format: 'date',
@@ -70,6 +73,9 @@ export const goalPatchSchema = {
       type: 'string',
     },
     target_value: {
+      type: 'number',
+    },
+    current_value: {
       type: 'number',
     },
     deadline: {

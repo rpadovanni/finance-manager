@@ -117,6 +117,14 @@ export const PATCH = async (
   }
 
   try {
+    const hasGoal = await prisma.goal.findUnique({
+      where: { id: queryId },
+    });
+
+    if (!hasGoal) {
+      return NextResponse.json({ error: 'Goal not found' }, { status: 404 });
+    }
+
     const body = await request.json();
     const { name, icon, target_value, current_value, deadline } = body;
 
