@@ -26,6 +26,13 @@ export const GET = async () => {
       where: { user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80' },
     });
 
+    if (spendingLimits.length === 0) {
+      return NextResponse.json(
+        { error: 'No spending limits found' },
+        { status: 404 },
+      );
+    }
+
     return NextResponse.json(spendingLimits, { status: 200 });
   } catch (error) {
     console.error('Error fetching spending limits:', error);
@@ -72,6 +79,8 @@ export const POST = async (request: Request) => {
         { status: 400 },
       );
     }
+
+    // TODO: Validate user_id
 
     const newSpendingLimit = await prisma.spendingLimit.create({
       data: {

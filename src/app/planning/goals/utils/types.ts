@@ -9,7 +9,6 @@ export type TGoalPostPayload = {
 
 export type TGoal = TGoalPostPayload & {
   id: number;
-  user_id: string;
 
   created_at: string;
   updated_at: string;

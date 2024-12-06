@@ -15,6 +15,13 @@ jest.mock('@prisma/client', () => {
       update: jest.fn(),
       delete: jest.fn(),
     },
+    spendingLimit: {
+      findMany: jest.fn(),
+      create: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+    },
   };
   return { PrismaClient: jest.fn(() => mPrismaClient) };
 });

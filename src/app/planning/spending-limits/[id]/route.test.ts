@@ -4,21 +4,20 @@
 import { GET, PATCH, DELETE } from './route';
 import { prismaMock } from '@/root/jest.setup';
 import {
-  goalMockPayload,
-  goalMockResponse,
-  patchMockPayload,
+  spendingLimitMockResponse,
+  spendingLimitPatchMockPayload,
 } from '../utils/mocks';
 
-describe('GOALS ROUTES', () => {
-  describe('GET /goals/{id}', () => {
+describe('SPENDING LIMITS ROUTES', () => {
+  describe('GET /spending-limits/{id}', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it('should return a goal with status 200', async () => {
+    it('should return a spending limit with status 200', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        spendingLimitMockResponse,
       );
       const params = Promise.resolve({ id: '1' });
 
@@ -30,7 +29,7 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual(goalMockResponse);
+      expect(result).toEqual(spendingLimitMockResponse);
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -48,9 +47,11 @@ describe('GOALS ROUTES', () => {
       expect(result).toEqual({ error: 'Invalid ID' });
     });
 
-    it('should return a 404 error if goal is not found', async () => {
+    it('should return a 404 error if spending limit is not found', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(null);
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        null,
+      );
       const params = Promise.resolve({ id: '2' });
 
       // Act
@@ -61,20 +62,19 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(404);
-      expect(result).toEqual({ error: 'Goal not found' });
+      expect(result).toEqual({ error: 'Spending limit not found' });
     });
 
-    it('should return a 500 error if fetching the goal fails', async () => {
+    it('should return a 500 error if fetching the spending limit fails', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockRejectedValue(
-        new Error('Failed to fetch goal'),
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockRejectedValue(
+        new Error('Failed to fetch spending limit'),
       );
+      const params = Promise.resolve({ id: '1' });
 
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
-
-      const params = Promise.resolve({ id: '1' });
 
       // Act
       const response = await GET({ json: async () => ({}) } as Request, {
@@ -84,40 +84,42 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(500);
-      expect(result).toEqual({ error: 'Failed to fetch goal' });
+      expect(result).toEqual({ error: 'Failed to fetch spending limit' });
 
       expect(console.error).toHaveBeenCalledWith(
-        'Error fetching goal:',
-        expect.objectContaining({ message: 'Failed to fetch goal' }),
+        'Error fetching spending limit:',
+        expect.objectContaining({ message: 'Failed to fetch spending limit' }),
       );
 
       consoleSpy.mockRestore();
     });
   });
 
-  describe('PATCH /goals/{id}', () => {
+  describe('PATCH /spending-limits/{id}', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it('should update a goal and return it with status 200', async () => {
+    it('should update a spending limit and return it with status 200', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        spendingLimitMockResponse,
       );
-      (prismaMock.goal.update as jest.Mock).mockResolvedValue(goalMockResponse);
+      (prismaMock.spendingLimit.update as jest.Mock).mockResolvedValue(
+        spendingLimitMockResponse,
+      );
       const params = Promise.resolve({ id: '1' });
 
       // Act
       const response = await PATCH(
-        { json: async () => goalMockPayload } as Request,
+        { json: async () => spendingLimitPatchMockPayload } as Request,
         { params },
       );
       const result = await response.json();
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual(goalMockResponse);
+      expect(result).toEqual(spendingLimitMockResponse);
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -126,7 +128,7 @@ describe('GOALS ROUTES', () => {
 
       // Act
       const response = await PATCH(
-        { json: async () => goalMockPayload } as Request,
+        { json: async () => spendingLimitPatchMockPayload } as Request,
         { params },
       );
       const result = await response.json();
@@ -136,69 +138,61 @@ describe('GOALS ROUTES', () => {
       expect(result).toEqual({ error: 'Invalid ID' });
     });
 
-    it('should return a 404 error if goal is not found', async () => {
+    it('should return a 404 error if spending limit is not found', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(null);
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        null,
+      );
       const params = Promise.resolve({ id: '2' });
 
       // Act
       const response = await PATCH(
-        { json: async () => goalMockPayload } as Request,
+        { json: async () => spendingLimitPatchMockPayload } as Request,
         { params },
       );
       const result = await response.json();
 
       // Assert
       expect(response.status).toBe(404);
-      expect(result).toEqual({ error: 'Goal not found' });
+      expect(result).toEqual({ error: 'Spending limit not found' });
     });
 
-    it('should return a 500 error if updating the goal fails', async () => {
+    it('should return a 500 error if updating the spending limit fails', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        spendingLimitMockResponse,
       );
-      (prismaMock.goal.update as jest.Mock).mockRejectedValue(
-        new Error('Failed to update goal'),
+      (prismaMock.spendingLimit.update as jest.Mock).mockRejectedValue(
+        new Error(),
       );
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
       const params = Promise.resolve({ id: '1' });
 
       // Act
       const response = await PATCH(
-        { json: async () => patchMockPayload } as Request,
+        { json: async () => spendingLimitPatchMockPayload } as Request,
         { params },
       );
       const result = await response.json();
 
       // Assert
       expect(response.status).toBe(500);
-      expect(result).toEqual({ error: 'Failed to update goal' });
-
-      expect(console.error).toHaveBeenCalledWith(
-        'Error updating goal:',
-        expect.objectContaining({ message: 'Failed to update goal' }),
-      );
-
-      consoleSpy.mockRestore();
+      expect(result).toEqual({ error: 'Failed to update spending limit' });
     });
   });
 
-  describe('DELETE /goals/{id}', () => {
+  describe('DELETE /spending-limits/{id}', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it('should delete a goal and return a message with status 200', async () => {
+    it('should delete a spending limit and return it with status 200', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        spendingLimitMockResponse,
       );
 
-      (prismaMock.goal.delete as jest.Mock).mockResolvedValue({
-        message: 'Goal deleted',
+      (prismaMock.spendingLimit.delete as jest.Mock).mockResolvedValue({
+        message: 'Spending limit deleted',
       });
 
       const params = Promise.resolve({ id: '1' });
@@ -211,7 +205,9 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual({ message: 'Goal deleted' });
+      expect(result).toEqual(
+        expect.objectContaining({ message: 'Spending limit deleted' }),
+      );
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -229,9 +225,11 @@ describe('GOALS ROUTES', () => {
       expect(result).toEqual({ error: 'Invalid ID' });
     });
 
-    it('should return a 404 error if goal is not found', async () => {
+    it('should return a 404 error if spending limit is not found', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(null);
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        null,
+      );
       const params = Promise.resolve({ id: '2' });
 
       // Act
@@ -242,16 +240,17 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(404);
-      expect(result).toEqual({ error: 'Goal not found' });
+      expect(result).toEqual({ error: 'Spending limit not found' });
     });
 
-    it('should return a 500 error if deleting the goal fails', async () => {
+    it('should return a 500 error if deleting the spending limit fails', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
+      (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
+        spendingLimitMockResponse,
       );
-      (prismaMock.goal.delete as jest.Mock).mockRejectedValue(
-        new Error('Failed to delete goal'),
+
+      (prismaMock.spendingLimit.delete as jest.Mock).mockRejectedValue(
+        new Error('Failed to delete spending limit'),
       );
 
       const consoleSpy = jest
@@ -268,11 +267,11 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(500);
-      expect(result).toEqual({ error: 'Failed to delete goal' });
+      expect(result).toEqual({ error: 'Failed to delete spending limit' });
 
       expect(console.error).toHaveBeenCalledWith(
-        'Error deleting goal:',
-        expect.objectContaining({ message: 'Failed to delete goal' }),
+        'Error deleting spending limit:',
+        expect.objectContaining({ message: 'Failed to delete spending limit' }),
       );
 
       consoleSpy.mockRestore();
