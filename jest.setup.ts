@@ -7,21 +7,19 @@ import { PrismaClient } from '@prisma/client';
 // import { loadEnvConfig } from '@next/env';
 
 jest.mock('@prisma/client', () => {
+  const prismaFunctionMocks = {
+    findMany: jest.fn(),
+    create: jest.fn(),
+    findUnique: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+  };
+
   const mPrismaClient = {
-    goal: {
-      findMany: jest.fn(),
-      create: jest.fn(),
-      findUnique: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-    },
-    spendingLimit: {
-      findMany: jest.fn(),
-      create: jest.fn(),
-      findUnique: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-    },
+    goal: prismaFunctionMocks,
+    spendingLimit: prismaFunctionMocks,
+    incomeDistribution: prismaFunctionMocks,
+    monthlyIncome: prismaFunctionMocks,
   };
   return { PrismaClient: jest.fn(() => mPrismaClient) };
 });

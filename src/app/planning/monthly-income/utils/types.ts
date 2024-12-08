@@ -1,3 +1,4 @@
+// Monthly Income Types
 export type TMonthlyIncomePayload = {
   amount: number;
   date: string;
@@ -7,10 +8,15 @@ export type TMonthlyIncomePayload = {
 export type TMonthlyIncome = TMonthlyIncomePayload & {
   id: number;
 
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
 };
 
+export type TMonthlyIncomeWithDistributions = TMonthlyIncome & {
+  distributions: TIncomeDistribution[];
+};
+
+// Income Distribution Types
 export type TIncomeDistributionPayload = {
   amount: number;
   category: string;
@@ -22,9 +28,12 @@ export type TIncomeDistribution = TIncomeDistributionPayload & {
   id: number;
   monthly_income_id: number;
 
-  created_at: Date;
-  updated_at: Date;
+  created_at: Date | string; // date or string because of Prisma and json response
+  updated_at: Date | string; // date or string because of Prisma and json response
 };
 
-export type TMonthlyIncomeWithDistributions = TMonthlyIncome &
-  TIncomeDistribution[];
+export type TIncomeDistributionPatchPayload =
+  Partial<TIncomeDistributionPayload> & {
+    amount: number;
+    percentage: number;
+  };

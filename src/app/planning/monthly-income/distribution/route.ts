@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { checkPercentageGreaterThanOneHundred } from '../utils/validations';
+import {
+  checkPercentageAllocationAllowed,
+  getAllocatedPercentage,
+} from '../utils/validations';
 
 const prisma = new PrismaClient();
 
@@ -74,10 +77,13 @@ export const POST = async (request: Request) => {
       where: { monthly_income_id },
     });
 
-    const isPercentageGreaterThanOneHundred =
-      await checkPercentageGreaterThanOneHundred(incomeDistributions);
+    const allocated = getAllocatedPercentage(incomeDistributions);
+    const isAllowed = checkPercentageAllocationAllowed({
+      allocated,
+      newPercentage: percentage,
+    });
 
-    if (isPercentageGreaterThanOneHundred) {
+    if (!isAllowed) {
       return NextResponse.json(
         { error: 'Total percentage exceeds 100%' },
         { status: 400 },

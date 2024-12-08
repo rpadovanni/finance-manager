@@ -162,9 +162,15 @@ describe('SPENDING LIMITS ROUTES', () => {
       (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
         spendingLimitMockResponse,
       );
+
       (prismaMock.spendingLimit.update as jest.Mock).mockRejectedValue(
-        new Error(),
+        new Error('Failed to update spending limit'),
       );
+
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
       const params = Promise.resolve({ id: '1' });
 
       // Act
@@ -177,6 +183,13 @@ describe('SPENDING LIMITS ROUTES', () => {
       // Assert
       expect(response.status).toBe(500);
       expect(result).toEqual({ error: 'Failed to update spending limit' });
+
+      expect(console.error).toHaveBeenCalledWith(
+        'Error updating spending limit:',
+        new Error('Failed to update spending limit'),
+      );
+
+      consoleSpy.mockRestore();
     });
   });
 

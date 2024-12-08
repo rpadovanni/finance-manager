@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { checkPercentageGreaterThanOneHundred } from '../../utils/validations';
+import {
+  checkPercentageAllocationAllowed,
+  getAllocatedPercentage,
+} from '../../utils/validations';
 
 const prisma = new PrismaClient();
 
@@ -71,18 +74,14 @@ export const PATCH = async (
     return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
   }
 
-  if (isNaN(queryId)) {
-    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
-  }
-
   try {
-    const hasIncomeDistribution = await prisma.incomeDistribution.findUnique({
+    const distribution = await prisma.incomeDistribution.findUnique({
       where: { id: queryId },
     });
 
-    if (!hasIncomeDistribution) {
+    if (!distribution) {
       return NextResponse.json(
-        { error: 'Spending limit not found' },
+        { error: 'Monthly distribution not found' },
         { status: 404 },
       );
     }
@@ -102,10 +101,14 @@ export const PATCH = async (
       where: { monthly_income_id: queryId },
     });
 
-    const isPercentageGreaterThanOneHundred =
-      await checkPercentageGreaterThanOneHundred(incomeDistributions);
+    const allocatedPercentage = getAllocatedPercentage(incomeDistributions);
+    const isAllowed = checkPercentageAllocationAllowed({
+      allocated: allocatedPercentage,
+      current: distribution.percentage,
+      newPercentage: percentage,
+    });
 
-    if (isPercentageGreaterThanOneHundred) {
+    if (!isAllowed) {
       return NextResponse.json(
         { error: 'Total percentage exceeds 100%' },
         { status: 400 },
