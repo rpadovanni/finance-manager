@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { userMock } from '@/utils/user.mock';
 
 const prisma = new PrismaClient();
 
@@ -23,7 +24,7 @@ const prisma = new PrismaClient();
 export const GET = async () => {
   try {
     const spendingLimits = await prisma.spendingLimit.findMany({
-      where: { user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80' },
+      where: { user_id: userMock.id },
     });
 
     if (spendingLimits.length === 0) {
