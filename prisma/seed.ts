@@ -33,7 +33,8 @@ async function main() {
   await prisma.spendingLimit.create({
     data: {
       name: 'Hobbies',
-      icon: '🎨',
+      icon: 'home.svg',
+      current_value: 100,
       limit_value: 200,
       user_id: user.id,
     },
@@ -43,7 +44,8 @@ async function main() {
   await prisma.goal.create({
     data: {
       name: 'New car',
-      icon: '🚗',
+      icon: 'car.svg',
+      current_value: 2500,
       target_value: 20000,
       user_id: user.id,
       deadline: new Date('2030-12-31'),
