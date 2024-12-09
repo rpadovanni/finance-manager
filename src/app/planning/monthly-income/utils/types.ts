@@ -1,8 +1,7 @@
 // Monthly Income Types
 export type TMonthlyIncomePayload = {
-  amount: number;
-  date: string;
-  name: string;
+  income: number;
+  user_id: string;
 };
 
 export type TMonthlyIncome = TMonthlyIncomePayload & {

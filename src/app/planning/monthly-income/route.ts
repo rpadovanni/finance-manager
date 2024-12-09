@@ -24,7 +24,7 @@ const prisma = new PrismaClient();
  */
 export const GET = async () => {
   try {
-    const returnedData = await prisma.monthlyIncome.findMany({
+    const incomes = await prisma.monthlyIncome.findMany({
       where: { user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80' },
       orderBy: {
         id: 'desc',
@@ -34,7 +34,14 @@ export const GET = async () => {
       },
     });
 
-    return NextResponse.json(returnedData, { status: 200 });
+    if (incomes.length === 0) {
+      return NextResponse.json(
+        { error: 'No monthly income found' },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json(incomes, { status: 200 });
   } catch (error) {
     console.error('Error fetching monthly incomes:', error);
     return NextResponse.json(

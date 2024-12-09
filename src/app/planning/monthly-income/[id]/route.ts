@@ -69,7 +69,7 @@ export const PATCH = async (
 
     if (!hasMonthlyIncome) {
       return NextResponse.json(
-        { error: 'Spending limit not found' },
+        { error: 'Monthly income not found' },
         { status: 404 },
       );
     }

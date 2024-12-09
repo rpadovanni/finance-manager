@@ -33,10 +33,9 @@ export const incomeDistributionPatchPayloadMock: TIncomeDistributionPatchPayload
 
 // Monthly Income Mocks
 export const monthlyIncomeMock: TMonthlyIncome = {
-  amount: 1000,
-  date: '2021-01-01',
-  name: 'Salary',
+  income: 2000,
   id: 1,
+  user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80',
   created_at: new Date('2021-01-01').toISOString(),
   updated_at: new Date('2021-01-02').toISOString(),
 };
@@ -48,7 +47,6 @@ export const monthlyIncomeWithDistributionsMock: TMonthlyIncomeWithDistributions
   };
 
 export const monthlyIncomePayloadMock: TMonthlyIncomePayload = {
-  amount: 1000,
-  date: '2021-01-01',
-  name: 'Salary',
+  income: 2000,
+  user_id: '96bee946-c7ef-48ed-854e-abaac87e4a80',
 };
