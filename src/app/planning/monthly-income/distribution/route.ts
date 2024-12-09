@@ -42,7 +42,7 @@ const prisma = new PrismaClient();
  *             schema:
  *               $ref: '#/components/schemas/IncomeDistribution'
  *       400:
- *         description: Bad Request
+ *         description: Missing required field(s) | Total percentage exceeds 100%
  *         content:
  *           application/json:
  *             schema:

@@ -102,6 +102,8 @@ export const GET = async (
  *               $ref: '#/components/schemas/Goal'
  *       400:
  *         description: Invalid ID
+ *       404:
+ *         description: Goal not found
  *       500:
  *         description: Failed to update goal
  */

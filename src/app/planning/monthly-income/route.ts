@@ -20,6 +20,8 @@ const prisma = new PrismaClient();
  *              type: array
  *              items:
  *                $ref: '#/components/schemas/MonthlyIncome'
+ *    404:
+ *      description: No monthly income found
  *    500:
  *      description: Failed to fetch monthly incomes
  */

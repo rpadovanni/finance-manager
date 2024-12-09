@@ -18,6 +18,8 @@ const prisma = new PrismaClient();
  *           application/json:
  *             schema:
  *              $ref: '#/components/schemas/SpendingLimit'
+ *       404:
+ *         description: No spending limits found
  *       500:
  *         description: Failed to fetch spending limits
  */
