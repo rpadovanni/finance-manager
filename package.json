@@ -10,7 +10,7 @@
     "dev": "next dev --turbopack",
     "prebuild": "pnpm lint",
     "build": "next build",
-    "start": "next start",
+    "postinstall": "pnpm db:generate",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prettify": "prettier --write \"**/**/*.{js,jsx,ts,tsx,css,html,json}\"",
