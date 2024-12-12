@@ -3,11 +3,7 @@
  */
 import { GET, PATCH, DELETE } from './route';
 import { prismaMock } from '@/root/jest.setup';
-import {
-  goalMockPayload,
-  goalMockResponse,
-  patchMockPayload,
-} from '../utils/mocks';
+import { goalMockPayload, goalMock, patchMockPayload } from '../../utils/mocks';
 
 describe('GOALS ROUTES', () => {
   describe('GET /goals/{id}', () => {
@@ -17,9 +13,7 @@ describe('GOALS ROUTES', () => {
 
     it('should return a goal with status 200', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
-      );
+      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(goalMock);
       const params = Promise.resolve({ id: '1' });
 
       // Act
@@ -30,7 +24,7 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual(goalMockResponse);
+      expect(result).toEqual(goalMock);
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -102,10 +96,8 @@ describe('GOALS ROUTES', () => {
 
     it('should update a goal and return it with status 200', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
-      );
-      (prismaMock.goal.update as jest.Mock).mockResolvedValue(goalMockResponse);
+      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(goalMock);
+      (prismaMock.goal.update as jest.Mock).mockResolvedValue(goalMock);
       const params = Promise.resolve({ id: '1' });
 
       // Act
@@ -117,7 +109,7 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual(goalMockResponse);
+      expect(result).toEqual(goalMock);
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -155,9 +147,7 @@ describe('GOALS ROUTES', () => {
 
     it('should return a 500 error if updating the goal fails', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
-      );
+      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(goalMock);
       (prismaMock.goal.update as jest.Mock).mockRejectedValue(
         new Error('Failed to update goal'),
       );
@@ -193,9 +183,7 @@ describe('GOALS ROUTES', () => {
 
     it('should delete a goal and return a message with status 200', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
-      );
+      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(goalMock);
 
       (prismaMock.goal.delete as jest.Mock).mockResolvedValue({
         message: 'Goal deleted',
@@ -247,9 +235,7 @@ describe('GOALS ROUTES', () => {
 
     it('should return a 500 error if deleting the goal fails', async () => {
       // Mock
-      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(
-        goalMockResponse,
-      );
+      (prismaMock.goal.findUnique as jest.Mock).mockResolvedValue(goalMock);
       (prismaMock.goal.delete as jest.Mock).mockRejectedValue(
         new Error('Failed to delete goal'),
       );

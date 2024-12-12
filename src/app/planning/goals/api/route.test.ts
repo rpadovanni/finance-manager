@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import { GET, POST } from './route';
-import { goalMockPayload, goalMockResponse } from './utils/mocks';
+import { goalMockPayload, goalMock } from '../utils/mocks';
 import { prismaMock } from '@/root/jest.setup';
 
 describe('GOALS ROUTES', () => {
@@ -13,9 +13,7 @@ describe('GOALS ROUTES', () => {
 
     it('should return a 200 with a list of goals', async () => {
       // Mock
-      (prismaMock.goal.findMany as jest.Mock).mockResolvedValue([
-        goalMockResponse,
-      ]);
+      (prismaMock.goal.findMany as jest.Mock).mockResolvedValue([goalMock]);
 
       // Act
       const response = await GET();
@@ -23,7 +21,7 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(goals).toEqual([goalMockResponse]);
+      expect(goals).toEqual([goalMock]);
     });
 
     it('should return a 404 error if no goal is found', async () => {
@@ -72,7 +70,7 @@ describe('GOALS ROUTES', () => {
 
     it('should return a 201 with the created goal', async () => {
       // Mock
-      (prismaMock.goal.create as jest.Mock).mockResolvedValue(goalMockResponse);
+      (prismaMock.goal.create as jest.Mock).mockResolvedValue(goalMock);
 
       // Act
       const response = await POST({
@@ -82,7 +80,7 @@ describe('GOALS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(201);
-      expect(goal).toEqual(goalMockResponse);
+      expect(goal).toEqual(goalMock);
     });
 
     it('should return a 400 error if missing required fields', async () => {

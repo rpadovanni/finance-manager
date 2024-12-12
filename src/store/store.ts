@@ -1,27 +1,10 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { goalsReducer } from '@/app/planning/goals/redux/goals.slice';
+import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-
-const userSlice = createSlice({
-  name: 'user',
-  initialState: {
-    name: 'John Doe',
-    age: 30,
-  },
-  reducers: {
-    setName(state, action) {
-      state.name = action.payload;
-    },
-    setAge(state, action) {
-      state.age = action.payload;
-    },
-  },
-});
-
-export const { setName, setAge } = userSlice.actions;
 
 export const store = configureStore({
   reducer: {
-    user: userSlice.reducer,
+    goals: goalsReducer,
   },
 });
 

@@ -9,7 +9,7 @@ export const goalMockPayload: TGoalPostPayload = {
   user_id: 'uuid',
 };
 
-export const goalMockResponse: TGoal = {
+export const goalMock: TGoal = {
   ...goalMockPayload,
   id: 1,
   created_at: new Date('2021-01-01').toDateString(),
