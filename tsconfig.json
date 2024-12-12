@@ -20,7 +20,13 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/root/*": ["./*"]
+      "@/root/*": ["./*"],
+      "@/components/*": ["./src/components/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/planning/*": ["./src/app/planning/*"],
+      "@/investments/*": ["./src/app/investments/*"],
+      "@/dashboard/*": ["./src/app/dashboard/*"]
     },
     "types": ["node"]
   },

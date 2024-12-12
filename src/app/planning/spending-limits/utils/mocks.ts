@@ -12,7 +12,7 @@ export const spendingLimitMockPayload: TSpendingLimitPostPayload = {
   user_id: 'uuid',
 };
 
-export const spendingLimitMockResponse: TSpendingLimit = {
+export const spendingLimitMock: TSpendingLimit = {
   ...spendingLimitMockPayload,
   id: 1,
   created_at: new Date('2021-01-01').toDateString(),

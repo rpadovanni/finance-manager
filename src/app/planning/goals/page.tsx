@@ -2,6 +2,7 @@
 
 import { useSelector } from 'react-redux';
 import { selectGoalById, selectGoals } from './redux/goals.selector';
+import { TGoal } from './utils/types';
 
 const GoalsPage = () => {
   const goals = useSelector(selectGoals);
@@ -15,7 +16,7 @@ const GoalsPage = () => {
         <li>
           <b>Goals Map</b>
         </li>
-        {goals.map((goal) => (
+        {goals.map((goal: TGoal) => (
           <ul key={goal.id}>
             <li>{goal.icon}</li>
             <li>{goal.name}</li>

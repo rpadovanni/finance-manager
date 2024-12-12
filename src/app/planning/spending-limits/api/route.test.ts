@@ -3,17 +3,14 @@
  */
 import { GET, POST } from './route';
 import { prismaMock } from '@/root/jest.setup';
-import {
-  spendingLimitMockPayload,
-  spendingLimitMockResponse,
-} from './utils/mocks';
+import { spendingLimitMockPayload, spendingLimitMock } from '../utils/mocks';
 
 describe('SPENDING LIMITS ROUTES', () => {
   describe('GET /spending-limits', () => {
     it('should return a 200 with a list of spending limits', async () => {
       // Mock
       (prismaMock.spendingLimit.findMany as jest.Mock).mockResolvedValue([
-        spendingLimitMockResponse,
+        spendingLimitMock,
       ]);
 
       // Act
@@ -22,7 +19,7 @@ describe('SPENDING LIMITS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(spendingLimits).toEqual([spendingLimitMockResponse]);
+      expect(spendingLimits).toEqual([spendingLimitMock]);
     });
 
     it('should return a 404 error if no spending limit is found', async () => {
@@ -68,7 +65,7 @@ describe('SPENDING LIMITS ROUTES', () => {
     it('should return a 201 with the created spending limit', async () => {
       // Mock
       (prismaMock.spendingLimit.create as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
 
       // Act
@@ -79,7 +76,7 @@ describe('SPENDING LIMITS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(201);
-      expect(spendingLimit).toEqual(spendingLimitMockResponse);
+      expect(spendingLimit).toEqual(spendingLimitMock);
     });
 
     it('should return a 400 error if missing required fields', async () => {

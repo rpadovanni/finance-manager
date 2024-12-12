@@ -22,30 +22,7 @@ export function MainNav() {
 
       <nav className="flex items-center gap-4 text-sm xl:gap-6">
         <Link
-          href="/investments"
-          className={cn(
-            'transition-colors hover:text-foreground/80',
-            pathname === '/docs' ? 'text-foreground' : 'text-foreground/80',
-          )}
-        >
-          Investments
-        </Link>
-
-        <Link
-          href="/budget"
-          className={cn(
-            'transition-colors hover:text-foreground/80',
-            pathname?.startsWith('/docs/components') &&
-              !pathname?.startsWith('/docs/component/chart')
-              ? 'text-foreground'
-              : 'text-foreground/80',
-          )}
-        >
-          Budget
-        </Link>
-
-        <Link
-          href="/goals"
+          href="/planning"
           className={cn(
             'transition-colors hover:text-foreground/80',
             pathname?.startsWith('/blocks')
@@ -53,7 +30,7 @@ export function MainNav() {
               : 'text-foreground/80',
           )}
         >
-          Goals
+          Financial Planning
         </Link>
       </nav>
     </div>

@@ -4,9 +4,9 @@
 import { GET, PATCH, DELETE } from './route';
 import { prismaMock } from '@/root/jest.setup';
 import {
-  spendingLimitMockResponse,
+  spendingLimitMock,
   spendingLimitPatchMockPayload,
-} from '../utils/mocks';
+} from '../../utils/mocks';
 
 describe('SPENDING LIMITS ROUTES', () => {
   describe('GET /spending-limits/{id}', () => {
@@ -17,7 +17,7 @@ describe('SPENDING LIMITS ROUTES', () => {
     it('should return a spending limit with status 200', async () => {
       // Mock
       (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
       const params = Promise.resolve({ id: '1' });
 
@@ -29,7 +29,7 @@ describe('SPENDING LIMITS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual(spendingLimitMockResponse);
+      expect(result).toEqual(spendingLimitMock);
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -103,10 +103,10 @@ describe('SPENDING LIMITS ROUTES', () => {
     it('should update a spending limit and return it with status 200', async () => {
       // Mock
       (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
       (prismaMock.spendingLimit.update as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
       const params = Promise.resolve({ id: '1' });
 
@@ -119,7 +119,7 @@ describe('SPENDING LIMITS ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(result).toEqual(spendingLimitMockResponse);
+      expect(result).toEqual(spendingLimitMock);
     });
 
     it('should return a 400 error if the ID is invalid', async () => {
@@ -160,7 +160,7 @@ describe('SPENDING LIMITS ROUTES', () => {
     it('should return a 500 error if updating the spending limit fails', async () => {
       // Mock
       (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
 
       (prismaMock.spendingLimit.update as jest.Mock).mockRejectedValue(
@@ -201,7 +201,7 @@ describe('SPENDING LIMITS ROUTES', () => {
     it('should delete a spending limit and return it with status 200', async () => {
       // Mock
       (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
 
       (prismaMock.spendingLimit.delete as jest.Mock).mockResolvedValue({
@@ -259,7 +259,7 @@ describe('SPENDING LIMITS ROUTES', () => {
     it('should return a 500 error if deleting the spending limit fails', async () => {
       // Mock
       (prismaMock.spendingLimit.findUnique as jest.Mock).mockResolvedValue(
-        spendingLimitMockResponse,
+        spendingLimitMock,
       );
 
       (prismaMock.spendingLimit.delete as jest.Mock).mockRejectedValue(
