@@ -6,10 +6,10 @@ import { prismaMock } from '@/root/jest.setup';
 import {
   incomeDistributionMock,
   incomeDistributionPatchPayloadMock,
-} from '../../utils/mocks';
+} from '../../../utils/mocks';
 
 describe('MONTHLY INCOME DISTRIBUTION ROUTES', () => {
-  describe('PATCH /monthly-income/distribution/[id]', () => {
+  describe('PATCH /monthly-incomes/distribution/[id]', () => {
     it('should return a 200 with the updated income distribution', async () => {
       // Mock
       (prismaMock.incomeDistribution.findUnique as jest.Mock).mockResolvedValue(

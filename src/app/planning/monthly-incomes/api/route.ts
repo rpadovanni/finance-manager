@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 /**
  * @openapi
- * /planning/monthly-income:
+ * /planning/monthly-incomes:
  *  get:
  *    tags:
  *      - Financial Planning - Monthly Income
@@ -56,7 +56,7 @@ export const GET = async () => {
 
 /**
  * @openapi
- * /planning/monthly-income:
+ * /planning/monthly-incomes:
  *  post:
  *    tags:
  *      - Financial Planning - Monthly Income

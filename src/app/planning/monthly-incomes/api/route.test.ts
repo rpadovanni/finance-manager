@@ -7,10 +7,10 @@ import {
   monthlyIncomeMock,
   monthlyIncomePayloadMock,
   monthlyIncomeWithDistributionsMock,
-} from './utils/mocks';
+} from '../utils/mocks';
 
 describe('MONTHLY INCOME ROUTES', () => {
-  describe('GET /monthly-income', () => {
+  describe('GET /monthly-incomes', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -69,7 +69,7 @@ describe('MONTHLY INCOME ROUTES', () => {
     });
   });
 
-  describe('POST /monthly-income', () => {
+  describe('POST /monthly-incomes', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });

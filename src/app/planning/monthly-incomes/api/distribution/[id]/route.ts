@@ -3,13 +3,13 @@ import { PrismaClient } from '@prisma/client';
 import {
   checkPercentageAllocationAllowed,
   getAllocatedPercentage,
-} from '../../utils/validations';
+} from '../../../utils/validations';
 
 const prisma = new PrismaClient();
 
 /**
  * @openapi
- * /planning/monthly-income/distribution/{id}:
+ * /planning/monthly-incomes/distribution/{id}:
  *   patch:
  *     tags:
  *       - Financial Planning - Monthly Income Distribution
