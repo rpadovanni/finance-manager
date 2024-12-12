@@ -22,6 +22,6 @@ const spendingLimitsSlice = createSlice({
   },
 });
 
-export const spendingLimitsReducer = spendingLimitsSlice.reducer;
+export default spendingLimitsSlice.reducer;
 export const { addSpendingLimit, removeSpendingLimit, updateSpendingLimit } =
   spendingLimitsSlice.actions;

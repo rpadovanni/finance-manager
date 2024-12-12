@@ -19,5 +19,4 @@ const goalsSlice = createSlice({
 });
 
 export const { addGoal, removeGoal, updateGoal } = goalsSlice.actions;
-export const goalsActions = goalsSlice.actions;
-export const goalsReducer = goalsSlice.reducer;
+export default goalsSlice.reducer;

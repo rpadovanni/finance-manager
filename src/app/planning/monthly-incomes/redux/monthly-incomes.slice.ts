@@ -17,6 +17,6 @@ const monthlyIncomesSlice = createSlice({
   },
 });
 
-export const monthlyIncomesReducer = monthlyIncomesSlice.reducer;
+export default monthlyIncomesSlice.reducer;
 export const { addMonthlyIncome, updateMonthlyIncome } =
   monthlyIncomesSlice.actions;
