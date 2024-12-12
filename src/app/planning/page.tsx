@@ -1,6 +1,7 @@
 'use client';
 
 import GoalsPage from './goals/page';
+import MonthlyIncomesPage from './monthly-incomes/page';
 import SpendingLimitPage from './spending-limits/page';
 
 const PlanningPage = () => {
@@ -10,6 +11,7 @@ const PlanningPage = () => {
 
       <GoalsPage />
       <SpendingLimitPage />
+      <MonthlyIncomesPage />
     </div>
   );
 };

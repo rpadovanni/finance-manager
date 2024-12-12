@@ -6,10 +6,10 @@ import { prismaMock } from '@/root/jest.setup';
 import {
   incomeDistributionMock,
   incomeDistributionPayloadMock,
-} from '../utils/mocks';
+} from '../../utils/mocks';
 
 describe('MONTHLY INCOME DISTRIBUTION ROUTES', () => {
-  describe('POST /monthly-income/distribution', () => {
+  describe('POST /monthly-incomes/distribution', () => {
     it('should return a 201 with the created income distribution', async () => {
       // Mock
       (prismaMock.incomeDistribution.findMany as jest.Mock).mockResolvedValue([

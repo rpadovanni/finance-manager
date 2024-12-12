@@ -1,8 +1,7 @@
-import { goalsReducer } from '@/app/planning/goals/redux/goals.slice';
-import planningReducer from '@/app/planning/redux/planning.slice';
-import { spendingLimitsReducer } from '@/planning/spending-limits/redux/spending-limits.slice';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+
+import planningReducer from '@/app/planning/redux.slice';
 
 export const store = configureStore({
   reducer: {

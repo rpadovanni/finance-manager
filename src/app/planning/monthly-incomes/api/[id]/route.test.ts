@@ -1,12 +1,12 @@
 /**
  * @jest-environment node
  */
-import { monthlyIncomeMock, monthlyIncomePayloadMock } from '../utils/mocks';
+import { monthlyIncomeMock, monthlyIncomePayloadMock } from '../../utils/mocks';
 import { PATCH } from './route';
 import { prismaMock } from '@/root/jest.setup';
 
 describe('MONTHLY INCOME ROUTES', () => {
-  describe('PATCH /monthly-income/:id', () => {
+  describe('PATCH /monthly-incomes/:id', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });

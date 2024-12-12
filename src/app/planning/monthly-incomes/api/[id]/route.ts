@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 /**
  * @openapi
- * /planning/monthly-income/{id}:
+ * /planning/monthly-incomes/{id}:
  *  patch:
  *    tags:
  *      - Financial Planning - Monthly Income
