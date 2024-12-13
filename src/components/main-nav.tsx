@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { siteConfig } from '@/utils/site-config';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/styles';
 
 import { ActivityIcon } from 'lucide-react';
 

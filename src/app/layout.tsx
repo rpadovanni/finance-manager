@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import ReduxProvider from '@/store/redux-provider';
 
 import { SiteHeader } from '@/components/site-header';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/styles';
 
 import '../styles/globals.css';
 

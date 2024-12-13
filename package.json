@@ -9,8 +9,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "prebuild": "pnpm lint",
-    "build": "next build",
-    "postinstall": "pnpm db:generate",
+    "build": "pnpm db:generate && next build",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prettify": "prettier --write \"**/**/*.{js,jsx,ts,tsx,css,html,json}\"",
@@ -22,10 +21,13 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@next/env": "^15.0.4",
+    "@hookform/resolvers": "^3.9.1",
+    "@next/env": "^15.1.0",
     "@prisma/client": "6.0.1",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.2",
     "@reduxjs/toolkit": "2.3.0",
     "@shadcn/ui": "0.0.4",
     "bcryptjs": "^2.4.3",
@@ -37,10 +39,12 @@
     "next-themes": "^0.4.4",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-hook-form": "^7.54.1",
     "react-redux": "9.1.2",
     "swagger-ui-react": "^5.18.2",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.4",
@@ -75,7 +79,7 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "5.6.3",
-    "typescript-eslint": "^8.17.0",
+    "typescript-eslint": "^8.18.0",
     "whatwg-fetch": "^3.6.20"
   },
   "overrides": {
