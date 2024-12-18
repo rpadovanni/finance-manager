@@ -10,7 +10,7 @@ const GoalsPage = () => {
 
   return (
     <div>
-      <h1>Goals</h1>
+      <h2>Goals</h2>
       ---
       <ul>
         <li>
