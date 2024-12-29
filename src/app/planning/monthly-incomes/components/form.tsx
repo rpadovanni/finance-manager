@@ -34,13 +34,15 @@ const IncomeForm = ({ closeButtonHandler, mode }: IncomeFormProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputData, any, FormOutputData>({
+  } = useForm<FormInputData, unknown, FormOutputData>({
     resolver: zodResolver(formSchema),
-    ...defaultValues,
+    defaultValues,
   });
 
   // Handlers
   const onSubmit: SubmitHandler<FormOutputData> = (data) => {
+    // TODO: Handle form submission
+    // eslint-disable-next-line no-console
     console.log(data);
   };
 

@@ -1,23 +1,33 @@
 'use client';
 
-import { Control, Controller, FieldError } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  FieldError,
+  FieldValues,
+  Path,
+} from 'react-hook-form';
 import { NumericFormat } from 'react-number-format';
 
 import { currencyFormatter } from '@/utils/currency';
 
-type CurrencyInputProps = {
-  name: string;
+type CurrencyInputProps<T extends FieldValues> = {
+  name: Path<T>;
   error?: FieldError | null;
-  control: Control<any>;
+  control: Control<T>;
 };
 
-const CurrencyInput = ({ name, error = null, control }: CurrencyInputProps) => {
+const CurrencyInput = <T extends FieldValues>({
+  name,
+  error = null,
+  control,
+}: CurrencyInputProps<T>) => {
   return (
     <>
       <Controller
         name={name}
         control={control}
-        render={({ field: { ref, value, onChange, ...fieldProps } }) => (
+        render={({ field: { ref, ...fieldProps } }) => (
           <NumericFormat
             className="border-b-2 border-solid focus:border-primary focus:outline-none"
             decimalScale={2}

@@ -8,10 +8,8 @@ export type TMonthlyIncome = TMonthlyIncomePayload & {
   id: number;
   created_at: string;
   updated_at: string;
-};
 
-export type TMonthlyIncomeWithDistributions = TMonthlyIncome & {
-  distributions: TIncomeDistribution[];
+  distributions?: TIncomeDistribution[];
 };
 
 // Income Distribution Types

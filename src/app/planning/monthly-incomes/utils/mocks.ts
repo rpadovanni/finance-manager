@@ -3,9 +3,8 @@ import {
   TIncomeDistribution,
   TIncomeDistributionPatchPayload,
   TIncomeDistributionPayload,
-  TMonthlyIncome,
   TMonthlyIncomePayload,
-  TMonthlyIncomeWithDistributions,
+  TMonthlyIncome,
 } from './types';
 
 // Common Dates
@@ -45,13 +44,8 @@ export const monthlyIncomeMock: TMonthlyIncome = {
   user_id: userMock.id,
   created_at: monthlyIncomeCreatedAt,
   updated_at: monthlyIncomeUpdatedAt,
+  distributions: [incomeDistributionMock],
 };
-
-export const monthlyIncomeWithDistributionsMock: TMonthlyIncomeWithDistributions =
-  {
-    ...monthlyIncomeMock,
-    distributions: [incomeDistributionMock],
-  };
 
 export const monthlyIncomePayloadMock: TMonthlyIncomePayload = {
   income: 2000,

@@ -4,11 +4,11 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/utils/styles';
 import { currencyFormatter } from '@/utils/currency';
 import { getParsedMonthAndYearDate } from '@/utils/date';
-import { TMonthlyIncomeWithDistributions } from '../utils/types';
+import { TMonthlyIncome } from '../utils/types';
 
 interface Props {
   index: number;
-  item: TMonthlyIncomeWithDistributions;
+  item: TMonthlyIncome;
   withSeparator?: boolean;
 }
 
