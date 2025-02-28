@@ -5,14 +5,14 @@ import { useSelector } from 'react-redux';
 import { SquarePenIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import IncomeForm from './form';
+import IncomeForm from '../form/form';
 
 import { currencyFormatter } from '@/utils/currency';
 
 import {
   selectMonthlyIncomeOfTheMonth,
   selectMonthlyIncomes,
-} from '../redux/monthly-incomes.selector';
+} from '../../redux/monthly-incomes.selector';
 
 const IncomeMainContent = () => {
   // States

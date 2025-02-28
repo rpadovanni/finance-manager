@@ -4,9 +4,11 @@ import dynamic from 'next/dynamic';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-const PreviousIncomes = memo(dynamic(() => import('./previous')));
-const IncomeMainContent = memo(dynamic(() => import('./main-content')));
-const IncomesChart = memo(dynamic(() => import('./chart')));
+const PreviousIncomes = memo(dynamic(() => import('../previous/previous')));
+const IncomeMainContent = memo(
+  dynamic(() => import('../main-content/main-content')),
+);
+const IncomesChart = memo(dynamic(() => import('../chart/chart')));
 
 const IncomesCard = () => {
   return (

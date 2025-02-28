@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/chart';
 
 import { getParsedMonthAndYearDate } from '@/utils/date';
-import { selectMonthlyIncomes } from '../redux/monthly-incomes.selector';
+import { selectMonthlyIncomes } from '../../redux/monthly-incomes.selector';
 
 const chartConfig: ChartConfig = {
   income: {

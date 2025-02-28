@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import IncomesCard from './monthly-incomes/components/main-card';
+import IncomesCard from './monthly-incomes/components/main-card/main-card';
 
 export const metadata: Metadata = {
   title: 'Financial Planning',

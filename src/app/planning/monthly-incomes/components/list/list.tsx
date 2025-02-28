@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import IncomeListItem from './list-item';
 
-import { selectMonthlyIncomes } from '../redux/monthly-incomes.selector';
+import { selectMonthlyIncomes } from '../../redux/monthly-incomes.selector';
 
 const IncomeList = () => {
   // Hooks

@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import CurrencyInput from './currency-input';
+import CurrencyInput from '../currency-input/currency-input';
 import { Button } from '@/components/ui/button';
 
 import { currencyFormatter } from '@/utils/currency';

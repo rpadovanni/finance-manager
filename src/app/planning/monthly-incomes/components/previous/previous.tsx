@@ -2,7 +2,7 @@
 
 import { useSelector } from 'react-redux';
 
-import IncomeList from './list';
+import IncomeList from '../list/list';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Accordion,
@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { selectMonthlyIncomes } from '../redux/monthly-incomes.selector';
+import { selectMonthlyIncomes } from '../../redux/monthly-incomes.selector';
 
 const PreviousIncomes = () => {
   // States
