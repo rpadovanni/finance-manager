@@ -6,13 +6,10 @@ export type TMonthlyIncomePayload = {
 
 export type TMonthlyIncome = TMonthlyIncomePayload & {
   id: number;
-
   created_at: string;
   updated_at: string;
-};
 
-export type TMonthlyIncomeWithDistributions = TMonthlyIncome & {
-  distributions: TIncomeDistribution[];
+  distributions?: TIncomeDistribution[];
 };
 
 // Income Distribution Types
@@ -23,16 +20,19 @@ export type TIncomeDistributionPayload = {
   percentage: number;
 };
 
-export type TIncomeDistribution = TIncomeDistributionPayload & {
+export type TIncomeDistribution = Omit<
+  TIncomeDistributionPayload,
+  'monthly_income_id'
+> & {
   id: number;
   monthly_income_id: number;
-
   created_at: Date | string; // date or string because of Prisma and json response
   updated_at: Date | string; // date or string because of Prisma and json response
 };
 
-export type TIncomeDistributionPatchPayload =
-  Partial<TIncomeDistributionPayload> & {
-    amount: number;
-    percentage: number;
-  };
+export type TIncomeDistributionPatchPayload = Partial<
+  Omit<TIncomeDistributionPayload, 'amount' | 'percentage'>
+> & {
+  amount: number;
+  percentage: number;
+};

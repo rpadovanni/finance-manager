@@ -3,11 +3,7 @@
  */
 import { GET, POST } from './route';
 import { prismaMock } from '@/root/jest.setup';
-import {
-  monthlyIncomeMock,
-  monthlyIncomePayloadMock,
-  monthlyIncomeWithDistributionsMock,
-} from '../utils/mocks';
+import { monthlyIncomeMock, monthlyIncomePayloadMock } from '../utils/mocks';
 
 describe('MONTHLY INCOME ROUTES', () => {
   describe('GET /monthly-incomes', () => {
@@ -18,7 +14,7 @@ describe('MONTHLY INCOME ROUTES', () => {
     it('should return a 200 with a list of monthly incomes', async () => {
       // Mock
       (prismaMock.monthlyIncome.findMany as jest.Mock).mockResolvedValue([
-        monthlyIncomeWithDistributionsMock,
+        monthlyIncomeMock,
       ]);
 
       // Act
@@ -27,7 +23,7 @@ describe('MONTHLY INCOME ROUTES', () => {
 
       // Assert
       expect(response.status).toBe(200);
-      expect(monthlyIncomes).toEqual([monthlyIncomeWithDistributionsMock]);
+      expect(monthlyIncomes).toEqual([monthlyIncomeMock]);
     });
 
     it('should return a 404 error if no monthly income is found', async () => {

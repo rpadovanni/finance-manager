@@ -6,6 +6,14 @@ import { PrismaClient } from '@prisma/client';
 // import { execSync } from 'child_process';
 // import { loadEnvConfig } from '@next/env';
 
+class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+window.ResizeObserver = ResizeObserver;
+
 jest.mock('@prisma/client', () => {
   const prismaFunctionMocks = {
     findMany: jest.fn(),

@@ -3,10 +3,15 @@ import {
   TIncomeDistribution,
   TIncomeDistributionPatchPayload,
   TIncomeDistributionPayload,
-  TMonthlyIncome,
   TMonthlyIncomePayload,
-  TMonthlyIncomeWithDistributions,
+  TMonthlyIncome,
 } from './types';
+
+// Common Dates
+const createdAt = new Date('2022-02-02').toISOString();
+const updatedAt = new Date('2022-03-03').toISOString();
+const monthlyIncomeCreatedAt = new Date('2021-01-01').toISOString();
+const monthlyIncomeUpdatedAt = new Date('2021-01-02').toISOString();
 
 // Income Distribution Mocks
 export const incomeDistributionMock: TIncomeDistribution = {
@@ -15,8 +20,8 @@ export const incomeDistributionMock: TIncomeDistribution = {
   monthly_income_id: 1,
   percentage: 50,
   id: 1,
-  created_at: new Date('2022-02-02').toISOString(),
-  updated_at: new Date('2022-03-03').toISOString(),
+  created_at: createdAt,
+  updated_at: updatedAt,
 };
 
 export const incomeDistributionPayloadMock: TIncomeDistributionPayload = {
@@ -34,18 +39,13 @@ export const incomeDistributionPatchPayloadMock: TIncomeDistributionPatchPayload
 
 // Monthly Income Mocks
 export const monthlyIncomeMock: TMonthlyIncome = {
-  income: 2000,
+  income: 4200,
   id: 1,
   user_id: userMock.id,
-  created_at: new Date('2021-01-01').toISOString(),
-  updated_at: new Date('2021-01-02').toISOString(),
+  created_at: monthlyIncomeCreatedAt,
+  updated_at: monthlyIncomeUpdatedAt,
+  distributions: [incomeDistributionMock],
 };
-
-export const monthlyIncomeWithDistributionsMock: TMonthlyIncomeWithDistributions =
-  {
-    ...monthlyIncomeMock,
-    distributions: [incomeDistributionMock],
-  };
 
 export const monthlyIncomePayloadMock: TMonthlyIncomePayload = {
   income: 2000,

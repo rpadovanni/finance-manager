@@ -31,6 +31,8 @@ const config = [
       'build/**',
       '.next/**',
       'coverage/**',
+      'src/components/ui/**',
+      'src/components/hooks/**',
     ],
   },
   // Configs

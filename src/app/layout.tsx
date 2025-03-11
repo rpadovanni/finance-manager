@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import ReduxProvider from '@/store/redux-provider';
 
 import { SiteHeader } from '@/components/site-header';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/styles';
 
 import '../styles/globals.css';
 
@@ -27,7 +27,7 @@ export default function RootLayout({
               <div className="mx-auto w-full border-border/40 dark:border-border min-[1800px]:max-w-[1536px] min-[1800px]:border-x">
                 <main className="flex-1">
                   <SiteHeader />
-                  <div className="relative flex min-h-screen flex-col bg-background p-12">
+                  <div className="relative flex min-h-screen flex-col bg-background md:p-12">
                     {children}
                   </div>
                 </main>
