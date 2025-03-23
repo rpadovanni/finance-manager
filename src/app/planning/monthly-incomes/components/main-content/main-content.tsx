@@ -4,9 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { SquarePenIcon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import IncomeForm from '../form/form';
-
 import { currencyFormatter } from '@/utils/currency';
 
 import {
@@ -48,12 +46,16 @@ const IncomeMainContent = () => {
               {currencyFormatter({ value: currentIncome.income })}
             </div>
 
-            <Button variant="ghost" size="icon" onClick={handleShowForm}>
+            <button
+              type="button"
+              onClick={handleShowForm}
+              className="text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center rounded-md"
+            >
               <SquarePenIcon className="text-muted-foreground" />
-            </Button>
+            </button>
           </div>
 
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             {percentageDifferenceFromLastMonth}
           </p>
         </>

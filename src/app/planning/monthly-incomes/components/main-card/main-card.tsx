@@ -17,7 +17,7 @@ const IncomesCard = () => {
         <CardTitle className="text-sm font-medium">
           Estimated income for this month
         </CardTitle>
-        <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
+        <DollarSignIcon className="text-muted-foreground h-4 w-4" />
       </CardHeader>
 
       <CardContent className="py-0">

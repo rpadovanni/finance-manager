@@ -6,9 +6,7 @@ import { useMemo } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import CurrencyInput from '../currency-input/currency-input';
-import { Button } from '@/components/ui/button';
-
+// import CurrencyInput from '../currency-input/currency-input';
 import { currencyFormatter } from '@/utils/currency';
 
 const formSchema = z.object({
@@ -50,17 +48,27 @@ const IncomeForm = ({ closeButtonHandler, mode }: IncomeFormProps) => {
   const renderFormButtons = useMemo(
     () =>
       isAddMode ? (
-        <Button size="icon" type="submit">
+        <button
+          type="submit"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+        >
           <PlusIcon />
-        </Button>
+        </button>
       ) : (
         <div>
-          <Button size="icon" type="submit" className="mr-2">
+          <button
+            type="submit"
+            className="mr-2 inline-flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+          >
             <CheckIcon />
-          </Button>
-          <Button size="icon" variant="outline" onClick={closeButtonHandler}>
+          </button>
+          <button
+            type="button"
+            onClick={closeButtonHandler}
+            className="border-input hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center rounded-md border bg-background"
+          >
             <X />
-          </Button>
+          </button>
         </div>
       ),
     [isAddMode, closeButtonHandler],
@@ -69,17 +77,25 @@ const IncomeForm = ({ closeButtonHandler, mode }: IncomeFormProps) => {
   // Render
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {/* TODO: Temporary workaround - will revisit components later */}
       <div className="grid grid-cols-2 gap-2">
-        <CurrencyInput
-          control={control}
-          name="currency"
-          error={errors.currency}
-        />
+        <div className="relative">
+          <input
+            className="border-input placeholder:text-muted-foreground focus:ring-ring w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2"
+            placeholder="0.00"
+            {...control.register('currency')}
+          />
+          {errors.currency && (
+            <span className="text-destructive text-xs">
+              {errors.currency.message}
+            </span>
+          )}
+        </div>
         {renderFormButtons}
       </div>
 
       {isAddMode && (
-        <p className="pt-4 text-xs text-muted-foreground md:w-3/4">
+        <p className="text-muted-foreground pt-4 text-xs md:w-3/4">
           It seems that you don't have any income yet. Add your first income to
           start planning your month.
         </p>
