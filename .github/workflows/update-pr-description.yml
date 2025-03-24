@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - opened
-      - synchronize
 
 jobs:
   update-pr-description:
@@ -20,9 +17,7 @@ jobs:
 
       - name: Generate changelog
         run: |
-          git fetch origin main
-          git checkout main
-          git pull origin main
+          git fetch origin main:refs/remotes/origin/main
           conventional-changelog -p angular -r 2 > generated_changelog.md
         shell: bash
 
@@ -33,10 +28,13 @@ jobs:
           # Capture the changelog from the generated file
           changelog=$(cat generated_changelog.md)
 
-          # Use GitHub API to update the pull request description
-          pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-          payload:$(echo '{}' | jq --arg body "$changelog" '.body = $body')
+          # Get the pull request number from the event
+          pr_number=$(jq --raw-output .number "$GITHUB_EVENT_PATH")
 
+          # Prepare the payload with the changelog
+          payload=$(echo '{}' | jq --arg body "$changelog" '.body = $body')
+
+          # Update the PR description using the GitHub API
           curl -s -X PATCH \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Content-Type: application/json" \
