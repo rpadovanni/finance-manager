@@ -27,7 +27,8 @@ jobs:
         sudo apt-get install --yes unzip
         wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
         unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-        export PATH="$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin"
+        echo "SONAR_SCANNER_HOME=$(pwd)/sonar-scanner-4.6.2.2472-linux" >> $GITHUB_ENV
+        echo "$SONAR_SCANNER_HOME/bin" >> $GITHUB_PATH
 
     - name: Cache SonarQube packages
       uses: actions/cache@v4
@@ -48,8 +49,9 @@ jobs:
 
     - name: Quality Gate Check
       if: always()
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         curl -X GET \
-        "$SONAR_HOST_URL/api/qualitygates/project_status?projectKey=rpadovanni_finance-manager" \
+        "https://sonarcloud.io/api/qualitygates/project_status?projectKey=rpadovanni_finance-manager" \
         -u $SONAR_TOKEN: | jq .status
-
