@@ -22,18 +22,19 @@ jobs:
       uses: SonarSource/sonarqube-scan-action@v5.0.0 
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
         args: >
-          -Dsonar.projectKey=rpadovanni_finance-manager \
-          -Dsonar.organization=rpadovanni \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.projectKey=rpadovanni_finance-manager
+          -Dsonar.organization=rpadovanni
+          -Dsonar.sources=.
+          -Dsonar.host.url=https://sonarcloud.io
 
     - name: Quality Gate Check
       if: always()
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        curl -X GET \
-        "https://sonarcloud.io/api/qualitygates/project_status?projectKey=rpadovanni_finance-manager" \
-        -u $SONAR_TOKEN: | jq .status
+        status=$(curl -s -u $SONAR_TOKEN: \
+        "https://sonarcloud.io/api/qualitygates/project_status?projectKey=rpadovanni_finance-manager" | jq -r .projectStatus.status)
+        echo "Quality Gate status: $status"
       shell: bash
