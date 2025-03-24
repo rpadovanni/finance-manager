@@ -3,7 +3,7 @@
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@heroui/button';
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -13,17 +13,17 @@ export function ThemeToggle() {
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={toggleTheme}>
+    <Button
+      aria-label="GitHub"
+      color="secondary"
+      onPress={toggleTheme}
+      variant="ghost"
+      isIconOnly
+    >
       {theme === 'light' ? (
-        <>
-          <Moon className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">Switch to Dark Mode</span>
-        </>
+        <Moon className="h-[1.2rem] w-[1.2rem]" />
       ) : (
-        <>
-          <Sun className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">Switch to Light Mode</span>
-        </>
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
       )}
     </Button>
   );
