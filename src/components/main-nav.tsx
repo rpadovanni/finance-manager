@@ -17,6 +17,7 @@ const navLinks = [
   { href: '/investments', label: 'Investments' },
   { href: '/budget', label: 'Budget' },
   { href: '/goals', label: 'Goals' },
+  { href: '/planning', label: 'Planning' },
 ];
 
 export function MainNav() {
